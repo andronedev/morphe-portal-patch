@@ -12,6 +12,8 @@ This repo is Portal-scoped: it only holds patches for apps that run on Meta Port
 | Patch | Apps | What it does |
 |---|---|---|
 | **Custom DPI** | YouTube, YouTube Music | Forces a higher display density for the app only (default 240 dpi, ~1.5x), so the UI scales up on Portal's low-dpi screen **without** changing the system density. Opt-in (`use = false`); enabled at build time with `-e "Custom DPI"` and tuned with `-O dpi=<value>`. |
+| **Custom version name** | YouTube, YouTube Music | Overrides `android:versionName` with the full value passed via `-O versionName=<value>`, so a re-patched build of the same upstream version is recognised as a new version. Runs in `finalize` (an `execute`-phase manifest edit is overwritten when the patcher rebuilds the manifest). Opt-in. |
+| **Disable experimental notice** | YouTube, YouTube Music | Neutralises the experimental-version warning dialog (it otherwise nags whenever the patched version differs from the recommended one) by emptying the merged extension method in `finalize`. Opt-in. |
 
 ### How "Custom DPI" works
 
